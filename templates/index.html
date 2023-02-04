@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+  <title>Readme Minimal Generator</title>
+
+</head>
+
+<body>
+  <nav class="navbar bg-dark">
+    <div class="container-xxl">
+      <a class="navbar-brand text-light">Readme Minimal Generator <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
+        <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
+      </svg></a>
+      <form class="d-flex" role="search">
+        <a href="https://github.com/JarnotMaciej" class="btn btn-light" id="github">Checkout my GitHub</a>
+      </form>
+    </div>
+  </nav>
+  <div class="container mb-3">
+    <h2 class="mb-3 display-2 text-primary">Readme Minimal Generator</h2>
+    <p>This site will help you to generate README.md file</p>
+    <form class="needs-validation" method="post" novalidate>
+      <div class="mb-3">
+        <input id="project-title" name="project-title" class="form-control form-control-lg" type="text"
+          placeholder="Project name">
+      </div>
+      <div class="mb-3">
+        <label for="short-desc" class="form-label">Short description</label>
+        <textarea class="form-control" id="short-desc" name="short-desc"
+          rows="3">A brief description of your project.</textarea>
+      </div>
+      <div class="mb-3">
+        <label for="problem-to-solve" class="form-label">What problem is solved with this program?</label>
+        <textarea class="form-control" id="problem-to-solve" name="problem-to-solve"
+          rows="3">Explain the problem that your project solves and why it is important.</textarea>
+      </div>
+      <div class="mb-3">
+        <label for="how-to-use" class="form-label">How to use it?</label>
+        <textarea class="form-control" id="how-to-use" name="how-to-use"
+          rows="3">Provide clear instructions on how to install and use your project, including any necessary dependencies.</textarea>
+      </div>
+      <!-- <div class="form-check form-switch mb-3">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+        <label class="form-check-label" for="flexCheckChecked">
+          Star
+        </label>
+      </div>
+      <div class="form-check form-switch mb-3">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+        <label class="form-check-label" for="flexCheckChecked">
+          Buy me a coffee
+        </label>
+      </div>
+      <div class="form-check form-switch mb-3">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+        <label class="form-check-label" for="flexCheckChecked">
+          My other projects
+        </label>
+      </div> -->
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  {% if not_all_fields_filled %}
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <div style="display: inline-block; font-size: 18px;">
+      Please fill all fields!
+    </div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endif %}
+
+  <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+
+</html>
