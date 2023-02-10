@@ -1,0 +1,6 @@
+{
+    "maxTitleLength": 64,
+    "maxShortDescLength": 10000,
+    "maxProblemToSolveLength": 10000,
+    "maxHowToUseLength": 10000
+}

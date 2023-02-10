@@ -27,22 +27,22 @@
     <p>This site will help you to generate README.md file</p>
     <form class="needs-validation" method="post" novalidate>
       <div class="mb-3">
-        <input id="project-title" name="project-title" class="form-control form-control-lg" type="text"
-          placeholder="Project name">
+        <input id="project-title" name="project-title" class="form-control form-control-lg is-invalid" type="text"
+          placeholder="Project name" maxlength="{{ maxTitleLength }}">
       </div>
       <div class="mb-3">
         <label for="short-desc" class="form-label">Short description</label>
-        <textarea class="form-control" id="short-desc" name="short-desc"
+        <textarea class="form-control is-valid" id="short-desc" name="short-desc" maxlength="{{ maxShortDescLength }}"
           rows="3">A brief description of your project.</textarea>
       </div>
       <div class="mb-3">
         <label for="problem-to-solve" class="form-label">What problem is solved with this program?</label>
-        <textarea class="form-control" id="problem-to-solve" name="problem-to-solve"
+        <textarea class="form-control is-valid" id="problem-to-solve" name="problem-to-solve" maxlength="{{ maxProblemToSolveLength }}"
           rows="3">Explain the problem that your project solves and why it is important.</textarea>
       </div>
       <div class="mb-3">
         <label for="how-to-use" class="form-label">How to use it?</label>
-        <textarea class="form-control" id="how-to-use" name="how-to-use"
+        <textarea class="form-control is-valid" id="how-to-use" name="how-to-use" maxlength="{{ maxHowToUseLength }}"
           rows="3">Provide clear instructions on how to install and use your project, including any necessary dependencies.</textarea>
       </div>
       <!-- <div class="form-check form-switch mb-3">
@@ -63,13 +63,45 @@
           My other projects
         </label>
       </div> -->
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary" id="main-submit-button" disabled>Submit</button>
     </form>
   </div>
   {% if not_all_fields_filled %}
   <div class="alert alert-danger alert-dismissible fade show" role="alert">
     <div style="display: inline-block; font-size: 18px;">
       Please fill all fields!
+    </div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endif %}
+  {% if project_title_too_long %}
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <div style="display: inline-block; font-size: 18px;">
+      Project title is too long!
+    </div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endif %}
+  {% if short_desc_too_long %}
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <div style="display: inline-block; font-size: 18px;">
+      <i>Short description</i> is too long!
+    </div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endif %}
+  {% if problem_to_solve_too_long %}
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <div style="display: inline-block; font-size: 18px;">
+      <i>Problem to solve</i> is too long!
+    </div>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endif %}
+  {% if how_to_use_too_long %}
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <div style="display: inline-block; font-size: 18px;">
+      <i>How to use</i> is too long!
     </div>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
