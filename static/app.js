@@ -1,18 +1,8 @@
 let textAreas = document.getElementsByTagName("textarea");
 let inputTitle = document.querySelector("#project-title");
 let submitButton = document.querySelector("#main-submit-button");
-
-let flagsToObtain = 0;
-let flagsObtained = 0;
-
-emptyOrTooLong(inputTitle, 64);
-flagsToObtain++;
-for (let i = 0; i < textAreas.length; i++) {
-    emptyOrTooLong(textAreas[i], 10000);
-    flagsToObtain++;
-}
-
-console.log(flagsToObtain);
+let coffeeSwitch = document.querySelector("#coffee-switch");
+let projectSwitch = document.querySelector("#project-switch");
 
 function emptyOrTooLong(x, lenmax) {
     x.addEventListener("keyup", () => {
@@ -55,3 +45,35 @@ function checkFlags() {
         submitButton.disabled = true;
     }
 }
+
+function hideShowInputs() {
+    if (coffeeSwitch.checked) {
+        document.querySelector("#coffee-input").classList.remove("d-none");
+        document.querySelector("#coffee-input").required = true;
+    } else {
+        document.querySelector("#coffee-input").classList.add("d-none");
+        document.querySelector("#coffee-input").required = false;
+    }
+    if (projectSwitch.checked) {
+        document.querySelector("#project-input").classList.remove("d-none");
+        document.querySelector("#project-input").required = true;
+    } else {
+        document.querySelector("#project-input").classList.add("d-none");
+        document.querySelector("#project-input").required = false;
+    }
+}
+
+// ----------------------------
+let flagsToObtain = 0;
+let flagsObtained = 0;
+
+emptyOrTooLong(inputTitle, 64);
+flagsToObtain++;
+for (let i = 0; i < textAreas.length; i++) {
+    emptyOrTooLong(textAreas[i], 10000);
+    flagsToObtain++;
+}
+
+coffeeSwitch.addEventListener("click", hideShowInputs);
+projectSwitch.addEventListener("click", hideShowInputs);
+

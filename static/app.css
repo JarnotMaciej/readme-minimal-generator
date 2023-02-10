@@ -5,3 +5,7 @@
     min-width: 400px;
     z-index: 2;
 }
+
+.d-none {
+    display: none;
+}

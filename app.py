@@ -22,6 +22,10 @@ def index():
         problem_to_solve = request.form['problem-to-solve']
         how_to_use = request.form['how-to-use']
 
+        coffee_in = request.form['coffee-in']
+        project_in = request.form['project-in']
+
+
         if(project_title == '' or short_desc == '' or problem_to_solve == '' or how_to_use == ''):
             return render_template("index.html", not_all_fields_filled=True, maxTitleLength=maxTitleLength, maxShortDescLength=maxShortDescLength, maxProblemToSolveLength=maxProblemToSolveLength, maxHowToUseLength=maxHowToUseLength)
         elif(len(project_title) > maxTitleLength):
@@ -33,7 +37,7 @@ def index():
         elif(len(how_to_use) > 10000):
             return render_template("index.html", how_to_use_too_long=True, maxTitleLength=maxTitleLength, maxShortDescLength=maxShortDescLength, maxProblemToSolveLength=maxProblemToSolveLength, maxHowToUseLength=maxHowToUseLength)
 
-        file_contents = test_func(project_title, short_desc, problem_to_solve, how_to_use)
+        file_contents = test_func(project_title, short_desc, problem_to_solve, how_to_use, coffee_in, project_in)
 
         response = Response(file_contents)
         response.headers["Content-Type"] = "text/plain"
@@ -43,9 +47,16 @@ def index():
 
     return render_template("index.html", maxTitleLength=maxTitleLength, maxShortDescLength=maxShortDescLength, maxProblemToSolveLength=maxProblemToSolveLength, maxHowToUseLength=maxHowToUseLength)
 
-def test_func(project_title, short_desc, problem_to_solve, how_to_use):
-    return f"# {project_title}\n\n## Short description\n\n{short_desc}\n\n## What problem does it solve?\n\n{problem_to_solve}\n\n## How to use it?\n\n{how_to_use}"
+def test_func(project_title, short_desc, problem_to_solve, how_to_use, coffee_in, project_in):
+    your_description = f"# {project_title}\n\n## Short description\n\n{short_desc}\n\n## What problem does it solve?\n\n{problem_to_solve}\n\n## How to use it?\n\n{how_to_use}"
+    if(coffee_in != "" or project_in != ""):
+        your_description += "\n-----"
+        if(coffee_in != ""):
+            your_description += "\n\n[__Buy me a coffee! :coffee:__]({coffee_in})"
+        if(project_in != ""):
+            your_description += "\n\n[__Check out my other projects!__]({project_in})"
+    return your_description
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
