@@ -2,5 +2,7 @@
     "maxTitleLength": 64,
     "maxShortDescLength": 10000,
     "maxProblemToSolveLength": 10000,
-    "maxHowToUseLength": 10000
+    "maxHowToUseLength": 10000,
+    "maxCoffeeURLLength": 64,
+    "maxProjectURLLength": 64
 }

@@ -29,13 +29,13 @@
     <p>This site will help you to generate README.md file</p>
     <form class="needs-validation" method="post" novalidate>
       <div class="mb-3">
-        <input id="project-title" name="project-title" class="form-control form-control-lg is-invalid bg-white" type="text"
-          placeholder="Project name" maxlength="{{ maxTitleLength }}">
+        <input id="project-title" name="project-title" class="form-control form-control-lg is-invalid bg-white"
+          type="text" placeholder="Project name" maxlength="{{ maxTitleLength }}">
       </div>
       <div class="mb-3">
         <label for="short-desc" class="form-label">Short description</label>
-        <textarea class="form-control is-valid bg-white" id="short-desc" name="short-desc" maxlength="{{ maxShortDescLength }}"
-          rows="3">A brief description of your project.</textarea>
+        <textarea class="form-control is-valid bg-white" id="short-desc" name="short-desc"
+          maxlength="{{ maxShortDescLength }}" rows="3">A brief description of your project.</textarea>
       </div>
       <div class="mb-3">
         <label for="problem-to-solve" class="form-label">What problem is solved with this program?</label>
@@ -45,7 +45,8 @@
       </div>
       <div class="mb-3">
         <label for="how-to-use" class="form-label">How to use it?</label>
-        <textarea class="form-control is-valid bg-white" id="how-to-use" name="how-to-use" maxlength="{{ maxHowToUseLength }}"
+        <textarea class="form-control is-valid bg-white" id="how-to-use" name="how-to-use"
+          maxlength="{{ maxHowToUseLength }}"
           rows="3">Provide clear instructions on how to install and use your project, including any necessary dependencies.</textarea>
       </div>
 
@@ -58,9 +59,10 @@
         </label>
       </div>
 
-      <div id="coffee-input" class="input-group mb-3">
+      <div id="coffee-input" class="input-group mb-3 {% if coffee_switch_status %}d-none{% endif %}">
         <span class="input-group-text border-primary bg-primary text-white">URL:</span>
-        <input id="coffee-in" name="coffee-in" type="url" class="form-control bg-white border-primary" placeholder="Enter your URL here" required>
+        <input id="coffee-in" name="coffee-in" type="url" class="form-control bg-white border-primary"
+          placeholder="Enter your URL here" maxlength="{ {maxCoffeeURLLength} }" required>
       </div>
 
       <div class="form-check form-switch mb-3">
@@ -69,53 +71,23 @@
           My other projects
         </label>
       </div>
-      <div id="project-input" class="input-group mb-3">
+      <div id="project-input" class="input-group mb-3 {% if project_switch_status %}d-none{% endif %}">
         <span class="input-group-text border-primary bg-primary text-white">URL:</span>
-        <input id="project-in" name="project-in" type="url" class="form-control bg-white border-primary" placeholder="Enter your URL here" required>
+        <input id="project-in" name="project-in" type="url" class="form-control bg-white border-primary"
+          placeholder="Enter your URL here" maxlength="{ {maxProjectURLLength} }" required>
       </div>
       <button type="submit" class="btn btn-warning" id="main-submit-button" disabled>Submit</button>
     </form>
   </div>
-  {% if not_all_fields_filled %}
+{% if error %}
   <div class="alert alert-danger alert-dismissible fade show" role="alert">
     <div style="display: inline-block; font-size: 18px;">
-      Please fill all fields!
+      {{ error|safe }}
     </div>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
-  {% endif %}
-  {% if project_title_too_long %}
-  <div class="alert alert-danger alert-dismissible fade show" role="alert">
-    <div style="display: inline-block; font-size: 18px;">
-      Project title is too long!
-    </div>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
-  {% endif %}
-  {% if short_desc_too_long %}
-  <div class="alert alert-danger alert-dismissible fade show" role="alert">
-    <div style="display: inline-block; font-size: 18px;">
-      <i>Short description</i> is too long!
-    </div>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
-  {% endif %}
-  {% if problem_to_solve_too_long %}
-  <div class="alert alert-danger alert-dismissible fade show" role="alert">
-    <div style="display: inline-block; font-size: 18px;">
-      <i>Problem to solve</i> is too long!
-    </div>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
-  {% endif %}
-  {% if how_to_use_too_long %}
-  <div class="alert alert-danger alert-dismissible fade show" role="alert">
-    <div style="display: inline-block; font-size: 18px;">
-      <i>How to use</i> is too long!
-    </div>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
-  {% endif %}
+{% endif %}
+
 
   <script src="{{ url_for('static', filename='/js/bootstrap.min.js') }}"></script>
   <script src="{{ url_for('static', filename='app.js') }}"></script>

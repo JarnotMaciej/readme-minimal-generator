@@ -1,8 +1,14 @@
+// Variables
 let textAreas = document.getElementsByTagName("textarea");
 let inputTitle = document.querySelector("#project-title");
 let submitButton = document.querySelector("#main-submit-button");
 let coffeeSwitch = document.querySelector("#coffee-switch");
 let projectSwitch = document.querySelector("#project-switch");
+let coffeeInput = document.querySelector("#coffee-input");
+let projectInput = document.querySelector("#project-input");
+
+// ----------------------------
+// Functions
 
 function emptyOrTooLong(x, lenmax) {
     x.addEventListener("keyup", () => {
@@ -64,6 +70,8 @@ function hideShowInputs() {
 }
 
 // ----------------------------
+// Main
+
 let flagsToObtain = 0;
 let flagsObtained = 0;
 
