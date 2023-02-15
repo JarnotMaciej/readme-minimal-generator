@@ -53,25 +53,25 @@
       <!--  -->
 
       <div class="form-check form-switch mb-3">
-        <input id="coffee-switch" name="coffee-switch" class="form-check-input" type="checkbox" value="" checked>
+        <input id="coffee-switch" name="coffee-switch" class="form-check-input" type="checkbox" value="" {% if coffee_switch_status %}checked{% endif %}>
         <label class="form-check-label" for="flexCheckChecked">
           Buy me a coffee
         </label>
       </div>
 
-      <div id="coffee-input" class="input-group mb-3 {% if coffee_switch_status %}d-none{% endif %}">
+      <div id="coffee-input" class="input-group mb-3">
         <span class="input-group-text border-primary bg-primary text-white">URL:</span>
         <input id="coffee-in" name="coffee-in" type="url" class="form-control bg-white border-primary"
           placeholder="Enter your URL here" maxlength="{ {maxCoffeeURLLength} }" required>
       </div>
 
       <div class="form-check form-switch mb-3">
-        <input id="project-switch" name="project-switch" class="form-check-input" type="checkbox" value="" checked>
+        <input id="project-switch" name="project-switch" class="form-check-input" type="checkbox" value="" {% if project_switch_status %}checked{% endif %}>
         <label class="form-check-label" for="flexCheckChecked">
           My other projects
         </label>
       </div>
-      <div id="project-input" class="input-group mb-3 {% if project_switch_status %}d-none{% endif %}">
+      <div id="project-input" class="input-group mb-3">
         <span class="input-group-text border-primary bg-primary text-white">URL:</span>
         <input id="project-in" name="project-in" type="url" class="form-control bg-white border-primary"
           placeholder="Enter your URL here" maxlength="{ {maxProjectURLLength} }" required>

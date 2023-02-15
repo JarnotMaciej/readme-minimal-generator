@@ -4,13 +4,12 @@ Readme Minimal Generator is a tool that helps with the process of creating a REA
 
 ### Todo
 
-- [ ] js - read from json  
-- [ ] project-switch  
-- [ ] coffee-switch  
 
 ### In Progress
 
 - [ ] fixing my shitty code  
+- [ ] project-switch  
+- [ ] coffee-switch  
 
 ### Done ✓
 

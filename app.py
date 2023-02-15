@@ -8,7 +8,7 @@ def read_data_from_json(file_name):
         data = json.load(f)
     return data
 
-configValues = read_data_from_json("config.json")
+configValues = read_data_from_json("templates/config.json")
 maxTitleLength = configValues["maxTitleLength"]
 maxShortDescLength = configValues["maxShortDescLength"]
 maxProblemToSolveLength = configValues["maxProblemToSolveLength"]
@@ -44,8 +44,8 @@ def validate_inputs(project_title, short_desc, problem_to_solve, how_to_use):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     error = None
-    coffee_switch_not_checked = False
-    project_switch_not_checked = False
+    coffee_switch_checked = True
+    project_switch_checked = True
 
     if request.method == 'POST':
         project_title = request.form['project-title']
@@ -55,8 +55,8 @@ def index():
 
         coffee_switch = request.form.get('coffee-switch')
         project_switch = request.form.get('project-switch')
-        coffee_switch_not_checked = not coffee_switch
-        project_switch_not_checked = not project_switch
+        coffee_switch_checked = coffee_switch
+        project_switch_checked = project_switch
 
         coffee_in = request.form['coffee-in']
         project_in = request.form['project-in']
@@ -78,8 +78,12 @@ def index():
                            maxHowToUseLength=maxHowToUseLength, 
                            maxCoffeeURLLength=maxCoffeeURLLength, 
                            maxProjectURLLength=maxProjectURLLength, 
-                           coffee_switch_status=coffee_switch_not_checked, 
-                           project_switch_status=project_switch_not_checked)
+                           coffee_switch_status=coffee_switch_checked, 
+                           project_switch_status=project_switch_checked)
+
+@app.route('/config', methods=['GET', 'POST'])
+def JSONconfig():
+    return render_template("config.json")
 
 if __name__ == '__main__':
     app.run()

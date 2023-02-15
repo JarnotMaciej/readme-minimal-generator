@@ -1,42 +1,50 @@
 // Variables
 let textAreas = document.getElementsByTagName("textarea");
 let inputTitle = document.querySelector("#project-title");
+let inputShortDesc = document.querySelector("#short-desc");
+let inputProblemToSolve = document.querySelector("#problem-to-solve");
+let inputHowToUse = document.querySelector("#how-to-use");
 let submitButton = document.querySelector("#main-submit-button");
 let coffeeSwitch = document.querySelector("#coffee-switch");
 let projectSwitch = document.querySelector("#project-switch");
-let coffeeInput = document.querySelector("#coffee-input");
-let projectInput = document.querySelector("#project-input");
+let inputCoffee = document.querySelector("#coffee-input");
+let inputProject = document.querySelector("#project-input");
 
 // ----------------------------
 // Functions
 
+async function loadConfig() {
+    try {
+        const response = await fetch("/config");
+        const json = await response.json();
+        return json;
+    } catch (error) {
+        console.error("Failed to load config:", error);
+        return null;
+    }
+}
+
 function emptyOrTooLong(x, lenmax) {
+    if (x.value == "" || x.value.length > lenmax) {
+        x.classList.remove("is-valid");
+        x.classList.add("is-invalid");
+    } else {
+        x.classList.remove("is-invalid");
+        x.classList.add("is-valid");
+    }
+}
+
+function validateAndListen(x, lenmax) {
     x.addEventListener("keyup", () => {
-        if (x.value == "" || x.value.length > lenmax) {
-            x.classList.remove("is-valid");
-            x.classList.add("is-invalid");
-            flagsObtained = howManyIsValids();
-            checkFlags();
-        } else {
-            x.classList.remove("is-invalid");
-            x.classList.add("is-valid");
-            flagsObtained = howManyIsValids();
-            checkFlags();
-        }
+        emptyOrTooLong(x, lenmax);
+        flagsObtained = howManyIsValids();
+        checkFlags();
     });
-    x.addEventListener("click", () => { 
-        if (x.value == "" || x.value.length > lenmax) {
-            x.classList.remove("is-valid");
-            x.classList.add("is-invalid");
-            flagsObtained = howManyIsValids();
-            checkFlags();
-        } else {
-            x.classList.remove("is-invalid");
-            x.classList.add("is-valid");
-            flagsObtained = howManyIsValids();
-            checkFlags();
-        }
-    })
+    x.addEventListener("click", () => {
+        emptyOrTooLong(x, lenmax);
+        flagsObtained = howManyIsValids();
+        checkFlags();
+    });
 }
 
 function howManyIsValids() {
@@ -75,13 +83,23 @@ function hideShowInputs() {
 let flagsToObtain = 0;
 let flagsObtained = 0;
 
-emptyOrTooLong(inputTitle, 64);
+hideShowInputs();
+let config = loadConfig();
+const maxTitleLength = config.maxTitleLength;
+const maxShortDescLength = config.maxShortDescLength;
+const maxProblemToSolveLength = config.maxProblemToSolveLength;
+const maxHowToUseLength = config.maxHowToUseLength;
+const maxCoffeeURL = config.maxCoffeeURLLength;
+const maxProjectURL = config.maxProjectURLLength;
+
+validateAndListen(inputTitle, maxTitleLength);
 flagsToObtain++;
-for (let i = 0; i < textAreas.length; i++) {
-    emptyOrTooLong(textAreas[i], 10000);
-    flagsToObtain++;
-}
+validateAndListen(inputShortDesc, maxShortDescLength);
+flagsToObtain++;
+validateAndListen(inputProblemToSolve, maxProblemToSolveLength);
+flagsToObtain++;
+validateAndListen(inputHowToUse, maxHowToUseLength);
+flagsToObtain++;
 
 coffeeSwitch.addEventListener("click", hideShowInputs);
 projectSwitch.addEventListener("click", hideShowInputs);
-
