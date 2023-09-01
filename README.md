@@ -1,5 +1,7 @@
 # Readme Minimal Generator
 
+![GitHub](https://img.shields.io/github/license/JarnotMaciej/readme-minimal-generator?style=flat-square) ![GitHub](https://img.shields.io/github/languages/top/JarnotMaciej/readme-minimal-generator?style=flat-square) ![GitHub](https://img.shields.io/github/languages/code-size/JarnotMaciej/readme-minimal-generator?style=flat-square) 
+
 ## Short description
 
 Readme Minimal Generator is a tool that helps with the process of creating a README file for a software project. It helps to quickly generate a basic structure for the file, including sections like short description, problem solved by program and usage.
